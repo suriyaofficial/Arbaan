@@ -4,8 +4,6 @@ import {useNavigate} from 'react-router-dom'
 import './dashboard.css'
 import Navbar from '../navbar/Navbar';
 import DeleteIcon from '@mui/icons-material/Delete';
-import LogoutIcon from '@mui/icons-material/Logout';
-
 import EditIcon from '@mui/icons-material/Edit';
 import Typography from '@mui/material/Typography';
 import Avatar from '@mui/material/Avatar';
@@ -19,9 +17,63 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
-import { deepOrange, deepPurple } from '@mui/material/colors';
+import TextField from '@mui/material/TextField';
+
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  pt: 2,
+  px: 4,
+  pb: 3,
+};
 
 
+function ChildModal(body) {
+  const [open, setOpen] = React.useState(false);
+  const dispatch =useDispatch()
+  const handleOpen = () => {
+    setOpen(true);
+    console.log({body})
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
+  const summary=useSelector((state)=>state.summary);
+
+  return (
+    <React.Fragment>
+     <Button variant="outlined" onClick={handleOpen} startIcon={<EditIcon />}>
+        Edit
+      </Button>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="child-modal-title"
+        aria-describedby="child-modal-description"
+      >
+        <Box sx={{ ...style, width: 400 }}>
+        <TextField
+        onChange={(e)=>dispatch({type:"userId",payload:(e.target.value)})}
+          id="outlined-required"
+          label="Required"
+          defaultValue={body.body}
+          MaxRows={10}
+        />
+          
+          <Button variant="contained" onClick={handleClose} endIcon={<SaveIcon />}>
+      Save
+      </Button>
+        </Box>
+      </Modal>
+    </React.Fragment>
+  );
+}
 
 
 
@@ -30,7 +82,9 @@ function Dashboard() {
   let navigate = useNavigate();
   const loginStatus=useSelector((state)=>state.login);
   const userid=useSelector((state)=>state.user);
+  const sum=useSelector((state)=>state.summary);
     const [post,setPost]=useState([]);
+    const dispatch =useDispatch()
     
 
   const [comments,setComments]=useState([]);
@@ -39,8 +93,11 @@ function Dashboard() {
     const [body,setBody]=useState([]);
     const id=useSelector((state)=>state.user);
     const [open, setOpen] = React.useState(false);
-    const handleOpen = () => setOpen(true);
+    const [edit, setEdit] = React.useState(false);
     const handleClose = () => setOpen(false);
+    const handleEdit = () => setEdit(true);
+    const handleEditClose = () => setEdit(false);
+    
     
     
       const style = {
@@ -64,6 +121,11 @@ function Dashboard() {
     fetchtitle();
    
   }, []);
+  function handleOpen()  {
+    
+    setOpen(true);
+    
+  };
   
    if (loginStatus===false) {
     return navigate("/");
@@ -105,6 +167,14 @@ function Dashboard() {
         });
       };
       
+    
+     function deletePost(){
+       fetch(`https://jsonplaceholder.typicode.com/users/${id.id}/posts`,{
+        method: 'DELETE',
+      });
+    }
+    
+
       
     console.log(post);
     console.log(post.length);
@@ -157,19 +227,21 @@ function Dashboard() {
                 {title.map((post) => {
                 return (
                         <>
-                        <ListItem
+                        <ListItem 
 
                         secondaryAction={
                         <IconButton edge="end" aria-label="Delete">
-                        <DeleteIcon onClick={handleDelete} />
+                        <DeleteIcon onClick={() => deletePost(id)} />
                         </IconButton>
                         }
                         disablePadding
                         >
 
-                        <ListItemButton role={undefined}  onClick={(e)=>{setBody(post.body)}} dense>
-
+                        <ListItemButton role={undefined}  onClick={(e)=>{setBody(post.body)}}
+                         dense>
+                        
                         <ListItemText id="" primary={`${post.title}`} onClick={handleOpen}/>
+                        
                         </ListItemButton>
                         </ListItem>
                         </>
@@ -179,32 +251,26 @@ function Dashboard() {
                       </List>
               </div>
 </div>
+
       <Modal
         open={open}
         onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
+        aria-labelledby="parent-modal-title"
+        aria-describedby="parent-modal-description"
       >
-        <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            SUMMARY
-          </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+        <Box sx={{ ...style, width: 400 }}>
+          <h2 id="parent-modal-title">summary</h2>
+          <p id="parent-modal-description">
             {body}
-          </Typography>
-          <Stack direction="row" spacing={2}>
-      <Button variant="outlined" startIcon={<EditIcon />}>
-        Edit
-      </Button>
-      <Button variant="contained" endIcon={<SaveIcon />}>
-      Save
-      </Button>
-    </Stack>
-
+          </p>
+          <ChildModal
+          body={body}/>
         </Box>
       </Modal>
-      
+     
     </div>
+    
+      
     </>
   )
 }

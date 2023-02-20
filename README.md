@@ -58,3 +58,36 @@ export default Post
       </IconButton> </div>  
         ))}
         </ol>
+
+
+
+        {/* <Modal
+        open={edit}
+        onClose={handleEditClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      ><TextField >hai</TextField></Modal>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+            SUMMARY
+          </Typography>
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+            {body}
+          </Typography>
+          <Stack direction="row" spacing={2}>
+      <Button variant="outlined" onClick={handleEdit} startIcon={<EditIcon />}>
+        Edit
+      </Button>
+      <Button variant="contained" endIcon={<SaveIcon />}>
+      Save
+      </Button>
+    </Stack>
+    
+        </Box>
+      </Modal> */}

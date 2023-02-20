@@ -25,7 +25,7 @@ body{
     font-family: sans-serif;
     width:250px;
         
-    background-color:rgb(26, 27, 34);
+    background-color:rgba(134, 134, 139, 0.534);
     padding: 3rem;
     border-radius: 5vh;
     position: relative;
@@ -48,8 +48,7 @@ body{
  .header, 
 .footer{
     text-align: center;
-    color: aliceblue;
-}
+    }
 
 .login-form{
     display: flex;
