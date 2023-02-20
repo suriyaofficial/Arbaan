@@ -1,0 +1,23 @@
+.nav-bar{
+    display: flex;
+    justify-content: space-between;
+    background:rgba(253, 253, 253, 0.3);
+    width: 105%;
+    padding: 10px;
+    margin-bottom: 50px;
+ 
+}
+.heading{
+    left: 500px;
+    text-transform: uppercase;
+    font-weight: 900;
+    color: aliceblue;
+}
+.avatar{
+    margin-bottom: 10px;
+}
+.name{
+    font-size: large;
+    color: aliceblue;
+    font-weight: bolder;
+}   
