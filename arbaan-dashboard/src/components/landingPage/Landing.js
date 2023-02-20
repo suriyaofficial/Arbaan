@@ -68,6 +68,7 @@ function Landing() {
             onChange={(e) => setPass(e.target.value)}
             placeholder="enter password"
           ></input>
+          <h6>hint: password-ADMIN</h6>
         </div>
         <button onClick={handleLogin}>LOGIN</button>
       </form>

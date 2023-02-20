@@ -76,12 +76,12 @@ body {
   border-radius: 100px;
 }
 
-/* @media (max-width:765px) {
+@media (max-width:765px) {
     body{
         padding: 2rem 0;
     }
     .login-card{
-        width: 150px;
+        width: 250px;
         padding: 2rem;
     }
-} */
+}

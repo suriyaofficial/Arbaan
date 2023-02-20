@@ -6,8 +6,6 @@ import Navbar from "../navbar/Navbar";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import Typography from "@mui/material/Typography";
-import Avatar from "@mui/material/Avatar";
-import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import IconButton from "@mui/material/IconButton";
@@ -44,7 +42,6 @@ function ChildModal(body) {
   const handleClose = () => {
     setOpen(false);
   };
-  const summary = useSelector((state) => state.summary);
 
   return (
     <React.Fragment>
@@ -86,21 +83,14 @@ function Dashboard() {
   let navigate = useNavigate();
   const loginStatus = useSelector((state) => state.login);
   const userid = useSelector((state) => state.user);
-  const sum = useSelector((state) => state.summary);
   const [post, setPost] = useState([]);
-  const dispatch = useDispatch();
-
   const [comments, setComments] = useState([]);
   const [todos, setTodos] = useState([]);
   const [title, setTitle] = useState([]);
   const [body, setBody] = useState([]);
   const id = useSelector((state) => state.user);
   const [open, setOpen] = React.useState(false);
-  const [edit, setEdit] = React.useState(false);
   const handleClose = () => setOpen(false);
-  const handleEdit = () => setEdit(true);
-  const handleEditClose = () => setEdit(false);
-
   const style = {
     position: "absolute",
     top: "50%",
@@ -112,24 +102,12 @@ function Dashboard() {
     boxShadow: 24,
     p: 4,
   };
-
-  // let url=[/static/images/avatar/${users.id}.jpg];
   useEffect(() => {
     fetchPost();
     fetchComment();
     fetchtodos();
     fetchtitle();
   }, []);
-  function handleOpen() {
-    setOpen(true);
-  }
-
-  if (loginStatus === false) {
-    return navigate("/");
-  } else {
-    localStorage.removeItem("LoginName");
-  }
-
   const fetchPost = async () => {
     await fetch(`https://jsonplaceholder.typicode.com/users/${userid.id}/posts`)
       .then((res) => res.json())
@@ -162,14 +140,26 @@ function Dashboard() {
         console.log(err);
       });
   };
-
-  function deletePost() {
-    fetch(`https://jsonplaceholder.typicode.com/users/${id.id}/posts`, {
-      method: "DELETE",
-    });
+  function handleOpen() {
+    setOpen(true);
   }
 
-  console.log(post);
+  if (loginStatus === false) {
+    return navigate("/");
+  } else {
+    localStorage.removeItem("LoginName");
+  }
+  
+    function MapDemo(){
+        const array1 = [1,2,3,4,5];
+        const map1 = array1.map(item => item*2 + ",")
+        
+    }
+
+
+  
+
+
   console.log(post.length);
   console.log(comments.length);
   console.log(todos.length);
@@ -234,7 +224,7 @@ function Dashboard() {
                     <ListItem
                       secondaryAction={
                         <IconButton edge="end" aria-label="Delete">
-                          <DeleteIcon onClick={() => deletePost(id)} />
+                          <DeleteIcon  />
                         </IconButton>
                       }
                       disablePadding
