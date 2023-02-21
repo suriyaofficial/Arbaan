@@ -1,4 +1,4 @@
-export const summaryReducer = (state = [], action) => {
+export const summaryReducer = (state=({}), action) => {
   switch (action.type) {
     case "summary":
       return (state = action.payload);

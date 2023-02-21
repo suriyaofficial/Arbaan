@@ -64,7 +64,8 @@ function Landing() {
           <br />
           <br />
           <input
-            type="text "
+            className="pass"
+            type="password"
             onChange={(e) => setPass(e.target.value)}
             placeholder="enter password"
           ></input>

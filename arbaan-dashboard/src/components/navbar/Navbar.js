@@ -13,7 +13,7 @@ function Navbar() {
   const dispatch = useDispatch();
   const userid = useSelector((state) => state.user);
   const x = avatar;
-  console.log(x.substring(0, 1));
+
   useEffect(() => {
     fetchname();
   }, []);
