@@ -75,17 +75,16 @@ body {
   padding: 0.5rem;
   border-radius: 100px;
 }
-.pass{
+.pass {
   width: 180px;
-
 }
 
-@media (max-width:765px) {
-    body{
-        padding: 2rem 0;
-    }
-    .login-card{
-        width: 250px;
-        padding: 2rem;
-    }
+@media (max-width: 765px) {
+  body {
+    padding: 2rem 0;
+  }
+  .login-card {
+    width: 250px;
+    padding: 2rem;
+  }
 }

@@ -1,6 +1,5 @@
 import { React, useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import LogoutIcon from "@mui/icons-material/Logout";
 import Avatar from "@mui/material/Avatar";
 import { deepOrange } from "@mui/material/colors";
@@ -13,10 +12,10 @@ function Navbar() {
   const dispatch = useDispatch();
   const userid = useSelector((state) => state.user);
   const x = avatar;
-
+  console.log(x.substring(0, 1));
   useEffect(() => {
     fetchname();
-  }, []);
+  });
   const fetchname = async () => {
     await fetch(`https://jsonplaceholder.typicode.com/users/${userid.id}`)
       .then((res) => res.json())

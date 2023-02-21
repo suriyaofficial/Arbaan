@@ -7,7 +7,7 @@ import logo from "../../asset/logo.png";
 
 function Landing() {
   const [users, setUsers] = useState([]);
-  const [id, setId] = useState([]);
+  const [id, setId] = useState([1]);
   const [pass, setPass] = useState([]);
   const dispatch = useDispatch();
   let navigate = useNavigate();
@@ -15,7 +15,7 @@ function Landing() {
 
   useEffect(() => {
     fetchData();
-  }, []);
+  });
 
   const fetchData = async () => {
     await fetch("https://jsonplaceholder.typicode.com/users")

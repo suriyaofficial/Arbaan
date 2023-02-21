@@ -120,7 +120,7 @@ function Dashboard() {
     fetchPost();
     fetchComment();
     fetchtodos();
-  }, []);
+  });
   const fetchPost = async () => {
     await fetch(`https://jsonplaceholder.typicode.com/users/${userid.id}/posts`)
       .then((res) => res.json())
